@@ -1,0 +1,48 @@
+<div *ngIf="!selectedOrder; else detail" class="card">
+  <div class="card-body">
+    <h2 class="card-title">
+      Ordenes
+    </h2>
+    <div class="card-text">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Dish</th>
+              <th>Total Due</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of orders" (click)="Select(order);">
+              <td>{{order.client}}</td>
+              <td>{{order.dish}}</td>
+              <td>$ {{order.totalDue}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #detail>
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title display-1">
+        {{selectedOrder.dish}}
+      </h1>
+      <hr class="my-4">
+      <div class="card-text">
+        <h4>Client: </h4>
+        <p>{{selectedOrder.client}}</p>
+        <h4>Total Due: </h4>
+        <p>{{selectedOrder.totalDue}}</p>
+        <h4>Delivered: </h4>
+        <select name="deliver" class="form-control">
+          <option *ngFor = "let del of deliver" [value] = "del">{{del}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</ng-template>
